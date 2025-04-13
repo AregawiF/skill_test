@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { FaHtml5, FaArrowRight } from 'react-icons/fa'; // Import icons
+import { FaHtml5, FaArrowRight } from 'react-icons/fa';
 
-// Define the structure for the form data
 interface ScoreFormData {
   rank: string;
   percentile: string;
@@ -12,8 +11,8 @@ interface ScoreFormData {
 interface UpdateScoresModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: ScoreFormData) => void; // Function to call when saving
-  initialData: ScoreFormData; // To pre-fill the form
+  onSave: (data: ScoreFormData) => void;
+  initialData: ScoreFormData;
 }
 
 const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
@@ -22,16 +21,13 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
   onSave,
   initialData,
 }) => {
-  // State to hold the form data being edited within the modal
   const [formData, setFormData] = useState<ScoreFormData>(initialData);
-  // State for validation errors
   const [errors, setErrors] = useState<{ rank?: string }>({});
 
-  // Reset form data when the modal opens with new initial data
   useEffect(() => {
     if (isOpen) {
       setFormData(initialData);
-      setErrors({}); // Clear errors when opening
+      setErrors({});
     }
   }, [isOpen, initialData]);
 
@@ -39,46 +35,43 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Basic validation on change (optional, can also validate on save)
     if (name === 'rank') {
       if (!value) {
         setErrors((prev) => ({ ...prev, rank: 'Rank is required' }));
       } else if (!/^\d+$/.test(value)) {
          setErrors((prev) => ({ ...prev, rank: 'Rank should be a number' }));
       } else {
-        setErrors((prev) => ({ ...prev, rank: undefined })); // Clear error
+        setErrors((prev) => ({ ...prev, rank: undefined }));
       }
     }
   };
 
-   const validateForm = (): boolean => {
-       const newErrors: { rank?: string } = {};
-       let isValid = true;
+  const validateForm = (): boolean => {
+    const newErrors: { rank?: string } = {};
+    let isValid = true;
 
-       if (!formData.rank) {
-           newErrors.rank = 'Rank is required';
-           isValid = false;
-       } else if (!/^\d+$/.test(formData.rank)) { // Check if it contains only digits
-           newErrors.rank = 'Rank should be a number';
-           isValid = false;
-       }
-       // Add validation for percentile and score if needed
+    if (!formData.rank) {
+      newErrors.rank = 'Rank is required';
+      isValid = false;
+    } else if (!/^\d+$/.test(formData.rank)) {
+      newErrors.rank = 'Rank should be a number';
+      isValid = false;
+    }
 
-       setErrors(newErrors);
-       return isValid;
-   };
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSave = () => {
     if (validateForm()) {
-      onSave(formData); // Call the onSave prop passed from the parent
-      // onClose(); // Parent will likely close the modal after saving
+      onSave(formData);
     }
   };
 
   // Helper component for list items
   const StepItem = ({ number, text }: { number: number; text: string }) => (
     <div className="flex items-center gap-3">
-      <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold">
+      <span className="flex items-center justify-center w-6 h-6 bg-blue-900 text-white rounded-full text-sm font-bold">
         {number}
       </span>
       <span className="font-semibold text-gray-700">{text}</span>
@@ -186,14 +179,14 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                 <div className="mt-6 flex justify-end space-x-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex items-center justify-center gap-1 rounded-md border border-blue-900 bg-white px-8 py-4 text-sm font-bold text-blue-950 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={onClose}
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center gap-1 rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex items-center justify-center gap-1 rounded-md border border-transparent bg-blue-900 px-8 py-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={handleSave}
                   >
                     Save <FaArrowRight size={12}/>

@@ -6,9 +6,16 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { TbTargetArrow } from 'react-icons/tb';
 
-const QuestionAnalysisCard = () => {
-    const score = 10;
-    const totalQuestions = 15;
+interface QuestionAnalysisCardProps {
+    score: number;
+    totalQuestions: number;
+}
+
+const QuestionAnalysisCard: React.FC<QuestionAnalysisCardProps> = ({
+    score,
+    totalQuestions
+  }) => {
+    
     const percentage = Math.round((score / totalQuestions) * 100);
 
     const progressBarColor = '#3B82F6';

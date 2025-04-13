@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "WhatBytes Dashboard", // Changed title
+  title: "WhatBytes Dashboard",
   description: "Skill Test Analysis",
 };
 
@@ -19,17 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} `}> 
+      <body className={inter.className}> 
         <div className="flex flex-col h-screen">
-          {/* Header at the top */}
           <Header />
-
-          <div className="flex flex-1">
-            {/* Sidebar on the left */}
+          <div className="flex flex-1 bg-gray-50">
             <Sidebar />
-
-            {/* Main content area */}
-            <main className="flex-1 overflow-y-auto p-4">
+            <main className="flex-1 overflow-y-auto p-6">
               {children}
             </main>
           </div>
@@ -38,5 +32,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
