@@ -1,9 +1,14 @@
 import React from 'react';
 import Card from '@/components/ui/Card';
-import { FaHtml5 } from 'react-icons/fa'; // Example icon
+import { FaHtml5 } from 'react-icons/fa'; 
 
-const TestDetailsCard = () => {
-  return (
+interface TestDetailsCardProps {
+    onUpdateClick: () => void; // Function to call when Update is clicked
+}
+
+
+const TestDetailsCard: React.FC<TestDetailsCardProps> = ({ onUpdateClick }) => { 
+    return (
     <Card className="flex items-center justify-between">
       <div className="flex items-center gap-4">
         <FaHtml5 className="text-orange-500 text-4xl" />
@@ -14,7 +19,10 @@ const TestDetailsCard = () => {
           </p>
         </div>
       </div>
-      <button className="bg-blue-900 text-white px-7 py-3 rounded-lg text-md font-medium hover:bg-blue-700">
+      <button 
+      className="bg-blue-900 text-white px-7 py-3 rounded-lg text-md font-medium hover:bg-blue-700"
+      onClick={onUpdateClick} 
+      >
         Update
       </button>
     </Card>

@@ -1,9 +1,8 @@
-import Header from '@/components/layout/Header';
-import Card from '@/components/ui/Card';
 import TestDetailsCard from '@/components/features/TestDetailsCard';
 import QuickStatsCard from '@/components/features/QuickStatsCard';
 import SyllabusAnalysisCard from '@/components/features/SyllabusAnalysisCard';
 import QuestionAnalysisCard from '@/components/features/QuestionAnalysisCard';
+import ComparisonGraphCard from '@/components/features/ComparisonGraphCard';
 
 export default function SkillTestPage() {
   return (
@@ -14,7 +13,7 @@ export default function SkillTestPage() {
           <div className="col-span-3 flex flex-col gap-6">
             <TestDetailsCard />
             <QuickStatsCard />
-            <Card>Comparison Graph Content</Card>
+            <ComparisonGraphCard />
           </div>
 
 
