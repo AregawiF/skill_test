@@ -3,6 +3,7 @@ import Card from '@/components/ui/Card';
 import TestDetailsCard from '@/components/features/TestDetailsCard';
 import QuickStatsCard from '@/components/features/QuickStatsCard';
 import SyllabusAnalysisCard from '@/components/features/SyllabusAnalysisCard';
+import QuestionAnalysisCard from '@/components/features/QuestionAnalysisCard';
 
 export default function SkillTestPage() {
   return (
@@ -20,7 +21,7 @@ export default function SkillTestPage() {
           {/* Right Column */}
           <div className="col-span-2 flex flex-col gap-6">
             <SyllabusAnalysisCard />
-            <Card>Question Analysis Content</Card>
+            <QuestionAnalysisCard /> 
           </div>
         </div>
       </div>
