@@ -14,7 +14,7 @@ const TestDetailsCard = () => {
           </p>
         </div>
       </div>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+      <button className="bg-blue-900 text-white px-7 py-3 rounded-lg text-md font-medium hover:bg-blue-700">
         Update
       </button>
     </Card>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Header = () => {
     return (
-        <header className="bg-white shadow-sm p-6 flex justify-between items-center">
+        <header className="bg-white shadow-sm border-b-2 border-gray-300 p-6 flex justify-between items-center">
             {/* We'll add user info later */}
             <div className='flex items-center'>
                 {/* Whatbytes logo */}

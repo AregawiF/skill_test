@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CardProps {
   children: React.ReactNode;
-  className?: string; // Allow passing additional classes
+  className?: string; 
 }
 
 const Card: React.FC<CardProps> = ({ children, className = '' }) => {
