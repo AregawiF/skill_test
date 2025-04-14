@@ -13,7 +13,7 @@ const SyllabusAnalysisCard = () => {
 
   return (
     <Card>
-      <h3 className="text-base font-semibold text-gray-700 mb-4">
+      <h3 className="text-lg font-bold  mb-4">
         Syllabus Wise Analysis
       </h3>
       <div className="space-y-4">

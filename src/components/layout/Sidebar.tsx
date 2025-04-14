@@ -22,16 +22,15 @@ const Sidebar = () => {
               (route.path === '/' && pathname === '/skill-test');
 
             return (
-              <li key={route.path}>
+              <li key={route.path} >
                 <Link 
                   href={route.path}
                   className={`
-                    flex items-center gap-3 px-4 py-3 text-gray-700 relative
-                    ${isActive ? 'bg-blue-900 text-white font-semibold' : 'hover:bg-gray-100'}
-                    ${isActive ? 'after:content-[""] after:absolute after:right-0 after:top-0 after:bottom-0 after:w-2 after:bg-blue-900 after:rounded-l-full' : ''}
+                    flex items-center gap-3 px-4 py-3 relative font-bold my-3 
+                    ${isActive ? 'text-blue-700 bg-gray-100 rounded-r-full' : 'text-gray-700'}
                   `}
                 >
-                  <route.icon className={`text-lg ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                  <route.icon className={`text-lg `} />
                   <span>{route.name}</span>
                 </Link>
               </li>

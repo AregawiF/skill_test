@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import React from 'react';
 import {
@@ -17,17 +17,19 @@ import {
 const data = [
   { percentile: 0, students: 1 },
   { percentile: 10, students: 2 },
-  { percentile: 20, students: 5 },
-  { percentile: 30, students: 8 }, // User's percentile approx location
-  { percentile: 40, students: 15 },
-  { percentile: 50, students: 30 },
-  { percentile: 60, students: 55 },
-  { percentile: 70, students: 70 },
-  { percentile: 80, students: 85 },
-  { percentile: 88, students: 90 }, // Approx peak
-  { percentile: 90, students: 88 }, // Added point for the peak label
-  { percentile: 95, students: 60 },
-  { percentile: 100, students: 20 },
+  { percentile: 20, students: 3 },
+  { percentile: 30, students: 8 }, 
+  { percentile: 40, students: 10 },
+  { percentile: 45, students: 12 },
+  { percentile: 50, students: 17 },
+  { percentile: 55, students: 15 },
+  { percentile: 60, students: 10 },
+  { percentile: 65, students: 6 },
+  { percentile: 70, students: 4 },
+  { percentile: 80, students: 3 },
+  { percentile: 90, students: 4 }, 
+  { percentile: 95, students: 2 },
+  { percentile: 100, students: 1 },
 ];
 
 // Find data point for the peak label (adjust logic if needed)
@@ -58,7 +60,7 @@ const CustomUserDot: React.FC<DotProps & { value?: number }> = (props) => {
   const { cx, cy, stroke, fill, value } = props; // value is automatically passed by Recharts
 
   // Only render if coordinates are valid numbers
-   if (typeof cx !== 'number' || typeof cy !== 'number') {
+  if (typeof cx !== 'number' || typeof cy !== 'number') {
     return null;
   }
 
@@ -69,16 +71,16 @@ const CustomUserDot: React.FC<DotProps & { value?: number }> = (props) => {
   // Returning null here to avoid duplicate dots if ReferenceDot is used.
   return null;
 
-   // If you wanted *all* dots styled differently:
+  // If you wanted *all* dots styled differently:
   // return <circle cx={cx} cy={cy} r={5} stroke={stroke} fill={fill} strokeWidth={2} />;
 };
 
 
 const ComparisonChart: React.FC<ComparisonChartProps> = ({ userPercentile }) => {
-   // Find the approximate student count for the user's percentile for the ReferenceDot
-   // This might need interpolation if the exact percentile isn't in the data
-   const userPoint = data.find(p => p.percentile === userPercentile) ??
-                     data.reduce((prev, curr) => Math.abs(curr.percentile - userPercentile) < Math.abs(prev.percentile - userPercentile) ? curr : prev); // Find closest point
+  // Find the approximate student count for the user's percentile for the ReferenceDot
+  // This might need interpolation if the exact percentile isn't in the data
+  const userPoint = data.find(p => p.percentile === userPercentile) ??
+    data.reduce((prev, curr) => Math.abs(curr.percentile - userPercentile) < Math.abs(prev.percentile - userPercentile) ? curr : prev); // Find closest point
 
   return (
     // Set aspect ratio for better responsiveness instead of fixed height
@@ -97,22 +99,19 @@ const ComparisonChart: React.FC<ComparisonChartProps> = ({ userPercentile }) => 
           dataKey="percentile"
           type="number"
           domain={[0, 100]}
-          tick={{ fontSize: 10, fill: '#6B7280' }} // Style tick labels
-          axisLine={false} // Hide axis line
-          tickLine={false} // Hide tick lines
+          tick={{ fontSize: 15, fill: '#000000' }} 
           ticks={[0, 25, 50, 75, 100]} // Specify ticks
           tickFormatter={(value) => `${value}`} // Display as number
         />
         <YAxis hide={true} domain={[0, 'dataMax + 10']} /> {/* Hide Y axis, add padding */}
 
-        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '3 3' }}/>
+        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '3 3' }} />
 
         <Line
           type="monotone" // Smooth curve
           dataKey="students"
           stroke="#8884d8" // Line color (purpleish)
           strokeWidth={2}
-          dot={false} // Hide default dots on the line itself
           activeDot={{ r: 6, fill: '#8884d8', stroke: '#ffffff', strokeWidth: 2 }} // Dot on hover
         />
 
@@ -127,26 +126,7 @@ const ComparisonChart: React.FC<ComparisonChartProps> = ({ userPercentile }) => 
             strokeWidth={2}
             isFront={true} // Ensure it's drawn on top
           >
-             <Label value="your percentile" position="top" offset={10} fontSize={10} fill="#6366F1" />
-          </ReferenceDot>
-        )}
-
-        {/* Label for the peak */}
-        {peakDataPoint && typeof peakDataPoint.students === 'number' && (
-          <ReferenceDot
-            x={peakDataPoint.percentile}
-            y={peakDataPoint.students}
-            r={0} // Make the dot invisible if only label is needed
-            isFront={true}
-          >
-            <Label position="top" offset={5} fontSize={10} fill="#4B5563">
-              {/* Custom label content */}
-              <text x={0} y={0} dy={-4} textAnchor="middle">
-                 {/* Position text using SVG attributes */}
-                <tspan x={0} dy="0em" fontWeight="bold">{peakLabelValue}</tspan>
-                <tspan x={0} dy="1.2em" fontSize="9">{`number of student : ${peakLabelStudents}`}</tspan>
-              </text>
-            </Label>
+            <Label value="your percentile" position="top" offset={10} fontSize={10} fill="#6366F1" />
           </ReferenceDot>
         )}
 

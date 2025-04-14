@@ -26,7 +26,7 @@ const QuestionAnalysisCard: React.FC<QuestionAnalysisCardProps> = ({
         <Card>
             <div className='flex justify-between'>
 
-                <h3 className="text-base font-semibold text-black mb-2">
+                <h3 className="text-lg font-bold mb-2">
                     Question Analysis
                 </h3>
 

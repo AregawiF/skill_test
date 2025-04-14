@@ -20,9 +20,9 @@ interface TestData {
 export default function SkillTestPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testData, setTestData] = useState<TestData>({
-    rank: '12',
-    percentile: '88',
-    score: '12',
+    rank: '1',
+    percentile: '30',
+    score: '10',
     totalQuestions: 15,
     submissionDate: '5 June 2021',
     duration: 15,
@@ -46,7 +46,7 @@ export default function SkillTestPage() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white p-0 m-0">
+    <div className="flex flex-col  bg-white p-0 m-0">
       <div className="p-6 flex-1">
         <h1 className="text-xl font-medium text-gray-800 mb-6">Skill Test</h1>
         <div className="grid grid-cols-5 gap-6">
@@ -66,6 +66,7 @@ export default function SkillTestPage() {
             <ComparisonGraphCard 
               score={parseInt(testData.score, 10)}
               totalQuestions={testData.totalQuestions}
+              percentile={parseInt(testData.percentile)}
             />
           </div>
 
