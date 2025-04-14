@@ -10,10 +10,9 @@ import {
   ResponsiveContainer,
   ReferenceDot,
   Label,
-  DotProps, // Import DotProps type
+  DotProps, 
 } from 'recharts';
 
-// Sample data structure - replace with actual data
 const data = [
   { percentile: 0, students: 1 },
   { percentile: 10, students: 2 },
@@ -32,17 +31,14 @@ const data = [
   { percentile: 100, students: 1 },
 ];
 
-// Find data point for the peak label (adjust logic if needed)
-const peakDataPoint = data.find(p => p.percentile === 90); // Example: find point at 90%ile
+const peakDataPoint = data.find(p => p.percentile === 90); 
 const peakLabelValue = peakDataPoint ? `${peakDataPoint.percentile}` : '';
-// The screenshot shows "number of students: 4", let's fake that for the label for now
 const peakLabelStudents = 4;
 
 interface ComparisonChartProps {
   userPercentile: number;
 }
 
-// Custom Tooltip Component
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
@@ -55,55 +51,40 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-// Custom Dot for the user's percentile
 const CustomUserDot: React.FC<DotProps & { value?: number }> = (props) => {
-  const { cx, cy, stroke, fill, value } = props; // value is automatically passed by Recharts
-
-  // Only render if coordinates are valid numbers
+  const { cx, cy, stroke, fill, value } = props; 
   if (typeof cx !== 'number' || typeof cy !== 'number') {
     return null;
   }
 
-  // Check if this dot corresponds to the user's percentile (or close enough)
-  // Note: Recharts might not place a dot *exactly* at userPercentile if it's between data points.
-  // This ReferenceDot approach below is usually more reliable for a specific highlight.
-  // We'll keep this simple and rely on ReferenceDot mainly.
-  // Returning null here to avoid duplicate dots if ReferenceDot is used.
   return null;
-
-  // If you wanted *all* dots styled differently:
-  // return <circle cx={cx} cy={cy} r={5} stroke={stroke} fill={fill} strokeWidth={2} />;
 };
 
 
 const ComparisonChart: React.FC<ComparisonChartProps> = ({ userPercentile }) => {
-  // Find the approximate student count for the user's percentile for the ReferenceDot
-  // This might need interpolation if the exact percentile isn't in the data
   const userPoint = data.find(p => p.percentile === userPercentile) ??
-    data.reduce((prev, curr) => Math.abs(curr.percentile - userPercentile) < Math.abs(prev.percentile - userPercentile) ? curr : prev); // Find closest point
+    data.reduce((prev, curr) => Math.abs(curr.percentile - userPercentile) < Math.abs(prev.percentile - userPercentile) ? curr : prev); 
 
   return (
-    // Set aspect ratio for better responsiveness instead of fixed height
     <ResponsiveContainer width="100%" aspect={2.5}>
       <LineChart
         data={data}
         margin={{
-          top: 20, // Make space for peak label
+          top: 20, 
           right: 20,
           left: 0,
           bottom: 5,
         }}
       >
-        {/* Removed CartesianGrid to match screenshot */}
         <XAxis
           dataKey="percentile"
           type="number"
           domain={[0, 100]}
           tick={{ fontSize: 15, fill: '#000000' }} 
-          ticks={[0, 25, 50, 75, 100]} // Specify ticks
-          tickFormatter={(value) => `${value}`} // Display as number
+          ticks={[0, 25, 50, 75, 100]} 
+          tickFormatter={(value) => `${value}`} 
         />
-        <YAxis hide={true} domain={[0, 'dataMax + 10']} /> {/* Hide Y axis, add padding */}
+        <YAxis hide={true} domain={[0, 'dataMax + 10']} />
 
         <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '3 3' }} />
 
@@ -115,18 +96,17 @@ const ComparisonChart: React.FC<ComparisonChartProps> = ({ userPercentile }) => 
           activeDot={{ r: 6, fill: '#8884d8', stroke: '#ffffff', strokeWidth: 2 }} // Dot on hover
         />
 
-        {/* Highlight user's percentile */}
         {userPoint && typeof userPoint.students === 'number' && (
           <ReferenceDot
             x={userPercentile}
-            y={userPoint.students} // Use interpolated/closest Y value
+            y={userPoint.students} 
             r={6} // Radius of the dot
-            fill="#6366F1" // User dot color (e.g., indigo-500)
+            fill="#6366F1" // User dot color (indigo-500)
             stroke="#ffffff"
             strokeWidth={2}
-            isFront={true} // Ensure it's drawn on top
+            isFront={true} 
           >
-            <Label value="your percentile" position="top" offset={10} fontSize={10} fill="#6366F1" />
+            <Label value="your percentile" position="top" offset={10} fontSize={15} fill="#6366F1" />
           </ReferenceDot>
         )}
 

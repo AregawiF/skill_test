@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image'; // Import next/image
+import Image from 'next/image';
 
 interface StatItemProps {
-  iconSrc: string;   // Changed from: icon: React.ReactElement
-  iconAlt: string;   // Added for accessibility
+  iconSrc: string;
+  iconAlt: string;
   value: string;
   label: string;
 }
@@ -11,14 +11,13 @@ interface StatItemProps {
 const StatItem: React.FC<StatItemProps> = ({ iconSrc, iconAlt, value, label }) => {
   return (
     <div className="flex items-center gap-3 p-3">
-      {/* Replaced icon rendering with next/image */}
-      <div className="flex-shrink-0"> {/* Added a wrapper to prevent shrinking if needed */}
+      <div className="flex-shrink-0">
         <Image
-          src={iconSrc}    // Use the image source prop
-          alt={iconAlt}    // Use the alt text prop
-          width={36}       // Specify width (adjust as needed) - required by next/image
-          height={36}      // Specify height (adjust as needed) - required by next/image
-          className="object-contain" // Optional: Adjust how image fits if dimensions mismatch
+          src={iconSrc}
+          alt={iconAlt}
+          width={36}
+          height={36}
+          className="object-contain"
         />
       </div>
       <div>

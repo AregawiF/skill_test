@@ -14,7 +14,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 h-screen bg-white shadow-md">
+    <aside className="w-64 h-full bg-white shadow-md">
       <nav className="mt-5">
         <ul className="space-y-1">
           {routes.map((route) => {

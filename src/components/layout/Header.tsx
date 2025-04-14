@@ -16,7 +16,7 @@ const Header = () => {
                 <div className='text-3xl font-bold'>WhatBytes</div>
 
             </div>
-            <div className="flex items-center space-x-2 border-2 border-gray-200 rounded-lg px-2 py-1">
+            <div className="flex items-center space-x-2 border-2 border-gray-200 rounded-lg px-2 py-1 cursor-pointer">
                 <Image
                     src="/profile.jpg"
                     alt="User Avatar"

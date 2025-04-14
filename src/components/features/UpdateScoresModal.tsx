@@ -68,7 +68,6 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
     }
   };
 
-  // Helper component for list items
   const StepItem = ({ number, text }: { number: number; text: string }) => (
     <div className="flex items-center gap-3">
       <span className="flex items-center justify-center w-6 h-6 bg-blue-900 text-white rounded-full text-sm font-bold">
@@ -81,7 +80,6 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
-        {/* Overlay */}
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -94,7 +92,6 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
           <div className="fixed inset-0 bg-black/30" />
         </Transition.Child>
 
-        {/* Modal Content */}
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
@@ -118,14 +115,12 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                 </div>
 
 
-                {/* Form Area */}
                 <div className="mt-4 space-y-5">
-                  {/* Rank */}
                   <div className="grid grid-cols-2 gap-4 items-start">
                     <StepItem number={1} text="Update your Rank" />
                     <div>
                       <input
-                        type="text" // Use text initially for easier validation message handling
+                        type="text" 
                         name="rank"
                         value={formData.rank}
                         onChange={handleChange}
@@ -142,23 +137,20 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                     </div>
                   </div>
 
-                  {/* Percentile */}
                   <div className="grid grid-cols-2 gap-4 items-start">
                     <StepItem number={2} text="Update your Percentile" />
                      <div>
                         <input
-                            type="number" // Can use number if strict number input is desired
+                            type="number" 
                             name="percentile"
                             value={formData.percentile}
                             onChange={handleChange}
                             placeholder="Percentile"
                             className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                         />
-                        {/* Add error display if needed */}
                     </div>
                   </div>
 
-                  {/* Score */}
                   <div className="grid grid-cols-2 gap-4 items-start">
                     <StepItem number={3} text="Update your Current Score (out of 15)" />
                     <div>
@@ -170,12 +162,10 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                             placeholder="Score"
                             className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                         />
-                        {/* Add error display if needed */}
                     </div>
                   </div>
                 </div>
 
-                {/* Buttons */}
                 <div className="mt-6 flex justify-end space-x-3">
                   <button
                     type="button"

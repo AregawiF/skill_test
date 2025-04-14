@@ -15,7 +15,7 @@ const getProgressBarColor = (percentage: number): string => {
 
 
 const SyllabusTopicItem: React.FC<SyllabusTopicItemProps> = ({ name, percentage }) => {
-  const barColor = getProgressBarColor(percentage); // Get color based on score
+  const barColor = getProgressBarColor(percentage); 
 
   return (
     <div>
