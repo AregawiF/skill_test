@@ -22,7 +22,7 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
   initialData,
 }) => {
   const [formData, setFormData] = useState<ScoreFormData>(initialData);
-  const [errors, setErrors] = useState<{ rank?: string }>({});
+  const [errors, setErrors] = useState<{ rank?:string, percentile?:string, score?:string}>({});
 
   useEffect(() => {
     if (isOpen) {
@@ -39,7 +39,7 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
       if (!value) {
         setErrors((prev) => ({ ...prev, rank: 'Rank is required' }));
       } else if (!/^\d+$/.test(value)) {
-         setErrors((prev) => ({ ...prev, rank: 'Rank should be a number' }));
+        setErrors((prev) => ({ ...prev, rank: 'Rank should be a number' }));
       } else {
         setErrors((prev) => ({ ...prev, rank: undefined }));
       }
@@ -55,6 +55,21 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
       isValid = false;
     } else if (!/^\d+$/.test(formData.rank)) {
       newErrors.rank = 'Rank should be a number';
+      isValid = false;
+    } 
+
+    if (!formData.percentile) {
+      newErrors.percentile = 'Percentile is required';
+      isValid = false;
+    } else if (!/^\d+$/.test(formData.percentile)) {
+      newErrors.percentile = 'Percentile should be a number';
+      isValid = false;
+    }
+    if (!formData.score) {
+      newErrors.score = 'Score is required';  
+      isValid = false;
+    } else if (!/^\d+$/.test(formData.score)) {
+      newErrors.score = 'Score should be a number';
       isValid = false;
     }
 
@@ -105,13 +120,13 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
             >
               <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <div className="flex justify-between items-start mb-4">
-                   <Dialog.Title
-                     as="h3"
-                     className="text-lg font-semibold leading-6 text-gray-900"
-                   >
-                     Update scores
-                   </Dialog.Title>
-                   <FaHtml5 className="text-orange-500 text-3xl" />
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-semibold leading-6 text-gray-900"
+                  >
+                    Update scores
+                  </Dialog.Title>
+                  <FaHtml5 className="text-orange-500 text-3xl" />
                 </div>
 
 
@@ -120,7 +135,7 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                     <StepItem number={1} text="Update your Rank" />
                     <div>
                       <input
-                        type="text" 
+                        type="text"
                         name="rank"
                         value={formData.rank}
                         onChange={handleChange}
@@ -139,29 +154,39 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
 
                   <div className="grid grid-cols-2 gap-4 items-start">
                     <StepItem number={2} text="Update your Percentile" />
-                     <div>
-                        <input
-                            type="number" 
-                            name="percentile"
-                            value={formData.percentile}
-                            onChange={handleChange}
-                            placeholder="Percentile"
-                            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                        />
+                    <div>
+                      <input
+                        type="number"
+                        name="percentile"
+                        value={formData.percentile}
+                        onChange={handleChange}
+                        placeholder="Percentile"
+                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                      {errors.percentile && (
+                        <p id="rank-error" className="text-xs text-red-500 mt-1">
+                          {errors.percentile}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4 items-start">
                     <StepItem number={3} text="Update your Current Score (out of 15)" />
                     <div>
-                        <input
-                            type="number"
-                            name="score"
-                            value={formData.score}
-                            onChange={handleChange}
-                            placeholder="Score"
-                            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                        />
+                      <input
+                        type="number"
+                        name="score"
+                        value={formData.score}
+                        onChange={handleChange}
+                        placeholder="Score"
+                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                      {errors.score && (
+                        <p id="rank-error" className="text-xs text-red-500 mt-1">
+                          {errors.score}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -179,7 +204,7 @@ const UpdateScoresModal: React.FC<UpdateScoresModalProps> = ({
                     className="inline-flex items-center justify-center gap-1 rounded-md border border-transparent bg-blue-900 px-8 py-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={handleSave}
                   >
-                    Save <FaArrowRight size={12}/>
+                    Save <FaArrowRight size={12} />
                   </button>
                 </div>
               </Dialog.Panel>
